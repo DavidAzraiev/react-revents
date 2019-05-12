@@ -9,7 +9,7 @@ import UserDetailed from '../../features/user/UserDetailed/UserDetailedPage';
 import SettingsDasboard from '../../features/user/Settings/SettingsDashboard';
 import EventForm from '../../features/event/EventForm/EventForm';
 import HomePage from '../../features/home/HomePage';
-import TestComponent from '../../features/event/testarea/TestComponent';
+import TestComponent from '../../features/testarea/TestComponent';
 
 class App extends Component {
   render() {
