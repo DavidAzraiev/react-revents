@@ -1,19 +1,18 @@
-import { createReducer } from '../../app/common/util/reducerUtil';
 import { INCREMENT_COUNTER, DECREMENT_COUNTER } from './testConstants';
+import { createReducer } from '../../app/common/util/reducerUtil'
 
 const initialState = {
-  data: 23
+  data: 43
 };
 
 export const incrementCounter = (state, payload) => {
   return { ...state, data: state.data + 1 };
-};
+}
 
 export const decrementCounter = (state, payload) => {
   return { ...state, data: state.data - 1 };
-};
+}
 
-// Another Method
 // const testReducer = (state = initialState, action) => {
 //   switch (action.type) {
 //     case INCREMENT_COUNTER:
