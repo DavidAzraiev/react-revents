@@ -1,6 +1,7 @@
 import { SubmissionError, reset } from 'redux-form';
 import { toastr } from 'react-redux-toastr';
 import { closeModal } from '../modals/modalActions';
+import { firestoreReducer } from 'react-redux-firebase';
 
 export const login = creds => {
   return async (dispatch, getState, { getFirebase }) => {
@@ -47,5 +48,30 @@ export const registerUser = user => async (
     throw new SubmissionError({
       _error: error.message
     });
+  }
+};
+
+export const socialLogin = selectedProvider => async (
+  dispatch,
+  getState,
+  { getFirebase, getFirestore }
+) => {
+  const firebase = getFirebase();
+  const firestore = getFirestore();
+  try {
+    dispatch(closeModal());
+    let user = await firebase.login({
+      provider: selectedProvider,
+      type: 'popup'
+    });
+    if (user.additionalUserInfo.isNewUser) {
+      await firestore.set(`users/${user.user.uid}`, {
+        displayName: user.profile.displayName,
+        photoUrl: user.profile.avatarUrl,
+        createdAt: firestore.FieldValue.serverTimestamp()
+      });
+    }
+  } catch (error) {
+    console.log(error);
   }
 };
