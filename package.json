@@ -9,6 +9,7 @@
     "google-map-react": "^0.34.0",
     "history": "^4.7.2",
     "moment": "^2.22.0",
+    "node-sass": "^4.12.0",
     "react": "^16.3.0",
     "react-cropper": "^1.0.1",
     "react-datepicker": "^1.4.0",
@@ -24,7 +25,7 @@
     "react-redux-toastr": "^7.2.3",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.9",
-    "react-scripts": "1.1.2",
+    "react-scripts": "2.1.8",
     "redux": "^3.7.2",
     "redux-auth-wrapper": "^2.0.2",
     "redux-firestore": "^0.3.2",
@@ -55,5 +56,11 @@
   "bugs": {
     "url": "https://github.com/DavidAzraiev/react-revents/issues"
   },
-  "homepage": "https://github.com/DavidAzraiev/react-revents#readme"
+  "homepage": "https://github.com/DavidAzraiev/react-revents#readme",
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
