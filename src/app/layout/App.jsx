@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Container } from 'semantic-ui-react';
 import { Route, Switch } from 'react-router-dom';
 import EventDashboard from '../../features/event/EventDashboard/EventDashboard';
@@ -9,14 +9,14 @@ import UserDetailedPage from '../../features/user/UserDetailed/UserDetailedPage'
 import PeopleDashboard from '../../features/user/PeopleDashboard/PeopleDashboard';
 import EventDetailedPage from '../../features/event/EventDetailed/EventDetailedPage';
 import HomePage from '../../features/home/HomePage';
-import TestComponent from '../../features/testarea/TestComponent';
 import ModalManager from '../../features/modals/ModalManager';
+import NotFound from '../../app/layout/NotFound';
 import { UserIsAuthenticated } from '../../features/auth/authWrapper';
 
 class App extends Component {
   render() {
     return (
-      <div>
+      <Fragment>
         <ModalManager />
         <Switch>
           <Route exact path='/' component={HomePage} />
@@ -30,7 +30,6 @@ class App extends Component {
               <Container className='main'>
                 <Switch>
                   <Route path='/events' component={EventDashboard} />
-                  <Route path='/test' component={TestComponent} />
                   <Route path='/event/:id' component={EventDetailedPage} />
                   <Route
                     path='/manage/:id'
@@ -52,12 +51,14 @@ class App extends Component {
                     path='/createEvent'
                     component={UserIsAuthenticated(EventForm)}
                   />
+                  <Route path='/error' component={NotFound} />
+                  <Route component={NotFound} />
                 </Switch>
               </Container>
             </div>
           )}
         />
-      </div>
+      </Fragment>
     );
   }
 }

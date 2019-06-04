@@ -147,19 +147,20 @@ export const goingToEvent = event => async (dispatch, getState) => {
   dispatch(asyncActionStart());
   const firestore = firebase.firestore();
   const user = firebase.auth().currentUser;
-  const photoURL = getState().firebase.profile.photoURL;
+  const profile = getState().firebase.profile;
   const attendee = {
     going: true,
     joinDate: Date.now(),
-    photoURL: photoURL || 'assets/user.png',
-    displayName: user.displayName,
-    host: true
+    photoURL: profile.photoURL || '/assets/user.png',
+    displayName: profile.displayName,
+    host: false
   };
   try {
     let eventDocRef = firestore.collection('events').doc(event.id);
     let eventAttendeeDocRef = firestore
       .collection('event_attendee')
       .doc(`${event.id}_${user.uid}`);
+
     await firestore.runTransaction(async transaction => {
       await transaction.get(eventDocRef);
       await transaction.update(eventDocRef, {
@@ -173,10 +174,10 @@ export const goingToEvent = event => async (dispatch, getState) => {
       });
     });
     dispatch(asyncActionFinish());
-    toastr.success('Success', 'You have singed to the event');
+    toastr.success('Success', 'You have signed up to event');
   } catch (error) {
     console.log(error);
-    dispatch(asyncActionError());
+    dispatch(asyncActionFinish());
     toastr.error('Oops', 'Problem signing up to event');
   }
 };
